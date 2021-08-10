@@ -1,0 +1,24 @@
+Function isWorkBookOpen(filename As String)
+
+    Dim ff As Long, errNo As Long
+
+    On Error Resume Next
+
+    ff = FreeFile()
+
+    Open filename For Input Lock Read As #ff
+
+    Close ff
+
+    errNo = Err
+    On Error GoTo 0
+
+    Select Case errNo
+
+        Case 0: isWorkBookOpen = False
+        Case 70: isWorkBookOpen = True
+        Case Else: Error errNo
+
+    End Select
+
+End Function
