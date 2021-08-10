@@ -1,0 +1,11 @@
+'Change WbName.xlsm with your WorkbookName and WsName with your worksheet name.
+
+Workbooks("WbName.xlsm").Worksheets("WsName").Activate
+
+Range("A1:D500").Select         'change the range according to your worksheet
+
+If ActiveSheet.FilterMode = True Then 
+    
+    ActiveSheet.ShowAllData  	'if filter is applied before remove the filter.
+
+End If
