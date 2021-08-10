@@ -1,0 +1,14 @@
+If you want your macros run fast, add the following two lines at the beginning of your code.
+
+	Application.ScreenUpdating = False 
+	Application.Calculation = xlCalculationManual
+
+
+Don't forget to switch ScreenUpdating and Calculation properties at the end of your code.
+If you don't you can't see your changes applied while dealing with formulas and this might goes you mad.
+
+Insert the following at the end of your code, right before End Sub.
+
+	Application.ScreenUpdating = True
+	Application.Calculation = xlCalculationAutomatic
+
