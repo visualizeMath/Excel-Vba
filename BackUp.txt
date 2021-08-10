@@ -1,0 +1,26 @@
+Sub Save_Backup(ByVal Backup_Folder_Path As String)
+
+    Dim fso As Object
+    Dim ExtensionName As String, filename As String
+    Dim wbSource As Workbook
+    Dim folder_path As String
+    Dim file_exists As String
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set wbSource = ThisWorkbook
+
+    ExtensionName = fso.GetExtensionName(wbSource.Name)
+    filename = Replace(wbSource.Name, "." & ExtensionName, "")
+
+
+folder_path = fso.BuildPath(Backup_Folder_Path, filename & " (" & Format(Now(), "dd-mm-yyyy") & ")." & ExtensionName)
+    
+    file_exists = Dir(folder_path)
+    
+    If file_exists = "" Then
+        fso.CopyFile ThisWorkbook.FullName, folder_path
+    End If
+
+    Set fso = Nothing
+    Set wbSource = Nothing
+
+End Sub
