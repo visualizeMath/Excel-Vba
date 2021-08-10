@@ -1,0 +1,18 @@
+    Dim foundRecord As Range  
+    Dim rowNumber As Long
+    Dim rngSearch As Range
+    
+ 
+    Set rngSearch = Worksheets("WorksheetName").Range("A:A") 'Search column A in worksheet named WorksheetName
+     
+    Set foundRecord = rngSearch.Find(what:=search_term, LookIn:=xlValues, _  'change the search_term with what you want to search for
+                                                      lookAt:=xlWhole, _
+                                                      SearchOrder:=xlByRows, _
+                                                      SearchDirection:=xlNext, _
+                                                      MatchCase:=False)
+    
+    If Not foundRecord Is Nothing Then  'if something is found, the row number will be stored in rowNumber variable
+         
+         rowNumber = foundRecord.Row
+    
+    End If
