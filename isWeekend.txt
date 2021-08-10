@@ -1,0 +1,18 @@
+'Pass the date as a parameter to IsWeekend function.
+' It returns boolean
+
+Function IsWeekend(ByVal givenDate As Date) As Boolean
+
+    Select Case Weekday(givenDate)
+    
+    Case vbSaturday, vbSunday
+        
+        IsWeekend = True
+        
+    Case Else
+    
+        IsWeekend = False
+        
+    End Select
+
+End Function
