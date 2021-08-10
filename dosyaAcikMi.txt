@@ -1,0 +1,27 @@
+Function DosyaAcik(DosyaAdi As Variant) As Boolean
+
+    Dim testbook As Workbook
+    Dim DosyaKisa As String
+    
+    DosyaKisa = DosyaAdi
+    
+    If InStr(DosyaAdi, "\") > 0 Then
+        
+        DosyaKisa = Mid(DosyaAdi, InStrRev(DosyaAdi, "\") + 1)
+        
+    End If
+    
+    On Error Resume Next
+    Set testbook = Workbooks(DosyaKisa)
+    
+        If Err = 0 Then
+        
+            DosyaAcik = True
+        
+        Else
+        
+             DosyaAcik = False
+        
+        End If
+        
+End Function
