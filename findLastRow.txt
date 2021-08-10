@@ -1,0 +1,10 @@
+'find last non empty row of a given column of a given worksheet
+' Pass Worksheet name and number of column(A:1,B:2,C:3 etc.) 
+
+Function find_last_row(ByVal sheetName As Worksheet, colNumber As Integer) As Long
+   
+    sheetName.Activate
+
+    find_last_row = Cells(Rows.Count, colNumber).End(xlUp).Row
+
+End Function
