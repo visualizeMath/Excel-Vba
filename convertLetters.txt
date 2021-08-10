@@ -1,0 +1,8 @@
+'Convert Turkish unicode characters to equivalent English characters 
+'The function also returns the characters in upper-case.
+
+Function convertLetters(ByVal givenText As String) As String
+
+        convertLetters = UCase(Replace(Replace(Replace(Replace(givenText, "ı", "I"), "i", "İ"), "ü", "Ü"), "ö", "O"))
+
+End Function
