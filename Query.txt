@@ -1,0 +1,75 @@
+Sub sorguCalistir()
+
+
+    Dim rng As Range
+    Application.ScreenUpdating = False
+    
+    Dim adFiltre As String
+    Dim soyadFiltre As String
+    Dim sonucSayisi As Integer
+    Dim ws As Worksheet
+   
+    Set ws = Sheets("Arsiv_Dosyalari")
+
+    adFiltre = Worksheets("ARAMA").Range("H20") & "*"
+    soyadFiltre = Worksheets("ARAMA").Range("I20") & "*"
+
+    
+FiltreyiKaldir
+With ws.ListObjects("Arsiv").Range
+        .AutoFilter Field:=5, Criteria1:=adFiltre
+        .AutoFilter Field:=6, Criteria1:=soyadFiltre, Operator:=xlFilterValues
+        
+End With
+
+    
+
+Worksheets("ARAMA").Range("G26:S500").ClearContents
+Worksheets("ARAMA").Range("G26:S500").ClearFormats
+
+Set rng = ws.ListObjects("Arsiv").Range
+
+  sonucSayisi = rng.Columns(1).SpecialCells(xlCellTypeVisible).Cells.Count - 1
+  If sonucSayisi < 250 And sonucSayisi > 0 Then
+  
+    rng.Offset(1, 0).Resize(rng.Rows.Count - 1).Copy Destination:=Worksheets("ARAMA").Range("G26")
+   
+    
+Else: MsgBox "Kayıt Bulunamadı.", vbInformation
+
+End If
+
+Application.ScreenUpdating = True
+End Sub
+
+Sub FiltreyiKaldir()
+
+Application.ScreenUpdating = False
+Application.Calculation = xlCalculationManual
+
+Dim ws As Worksheet
+
+
+'filtreyi kaldir
+
+Workbooks("ARŞİV_TÜM(SON).xlsm").Worksheets("Arsiv_Dosyalari").Activate
+
+Range("A1:J15000").Select
+
+If ActiveSheet.FilterMode = True Then
+    
+    ActiveSheet.ShowAllData
+
+End If
+
+
+Worksheets("ARAMA").Activate
+Worksheets("ARAMA").Range("G26:S500").ClearContents
+Worksheets("ARAMA").Range("G26:S500").ClearFormats
+Range("H20") = ""
+Range("I20") = ""
+
+Application.ScreenUpdating = True
+Application.Calculation = xlCalculationAutomatic
+End Sub
+
